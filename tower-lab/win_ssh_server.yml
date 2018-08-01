@@ -1,0 +1,7 @@
+---
+- name: Deploy OpenSSH
+  hosts: windows
+  gather_facts: no
+  roles:
+    - win_service_config
+

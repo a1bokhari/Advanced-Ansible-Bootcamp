@@ -1,0 +1,32 @@
+---
+- name: Deploy a 3-tier app
+  hosts: all
+  become: true
+  vars_files:
+    - vars/vars.yml
+  tasks:
+    - name: Enable repos
+      copy:
+        src: "files/{{ repo_file }}"
+        dest: "/etc/yum.repos.d/{{ repo_file }}"
+        mode: 0644
+
+    - name: Deploy haproxy on the frontends
+      include_role:
+        name: haproxy
+      when: inventory_hostname in groups.frontends
+
+    - name: Deploy tomcat on the app servers
+      include_role:
+        name: tomcat
+      when: inventory_hostname in groups.apps
+
+    - name: Deploy postgres on the appdbs servers
+      include_role:
+        name: geerlingguy.postgresql
+      when: inventory_hostname in groups.appdbs
+
+    - name: Deploy apache on the app servers
+      include_role:
+        name: apache
+      when: inventory_hostname in groups.apps
