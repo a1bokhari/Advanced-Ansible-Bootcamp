@@ -1,0 +1,20 @@
+---
+- name: Provision openstack networks
+  hosts: jumpbox
+  vars_files:
+    - vars/dict.yml
+  roles:
+    - osp-network
+    - osp-keypair
+    - osp-flavor
+    - osp-securitygroup
+  tasks:
+    - name: Create all VMs
+      include_role: 
+        name: osp-vm-dict
+      with_dict: "{{ vm_info }}"
+
+## Alternate Method to create dynmaic inventory
+    - name: Gather facts
+      include_role: 
+        name: osp-facts
