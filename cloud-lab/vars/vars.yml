@@ -1,0 +1,7 @@
+---
+vm_info:
+  - { name: 'app1', group: 'apps', deployment_name: 'QA', flavor: 'm2.small', network: 'private_net', keyname: 'ansible_ssh_key', image: 'rhel-guest', secgroup: 'app_servers' }
+  - { name: 'app2', group: 'apps', deployment_name: 'QA', flavor: 'm2.small', network: 'private_net', keyname: 'ansible_ssh_key', image: 'rhel-guest', secgroup: 'app_servers' }
+  - { name: 'db', group: 'appsdb', deployment_name: 'QA', flavor: 'm2.small', network: 'private_net', keyname: 'ansible_ssh_key', image: 'rhel-guest', secgroup: 'db_servers' }
+  - { name: 'frontend', group: 'frontends', deployment_name: 'QA', flavor: 'm2.small', network: 'private_net', keyname: 'ansible_ssh_key', image: 'rhel-guest', secgroup: 'frontend_servers' }
+

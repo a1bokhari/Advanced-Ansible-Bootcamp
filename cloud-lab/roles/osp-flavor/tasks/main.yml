@@ -1,0 +1,12 @@
+---
+# tasks file for roles/osp-flavor
+- name: Create custom flavor
+  os_nova_flavor:
+    cloud: ospcloud
+    disk: 10
+    is_public: yes
+    ram: 2048
+    vcpus: 1
+    name: m2.small
+    state: present
+

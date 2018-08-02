@@ -1,0 +1,49 @@
+---
+#
+# run this playbook with ansible.cfg and inventory from the cloud-labs folder
+#
+- name: Deploy a 3-tier app
+  hosts: jumpbox
+  gather_facts: true
+  roles:
+    - name: osp-facts
+
+- name: Enable repos
+  hosts: frontends, apps, appsdb
+  gather_facts: False
+  vars_files:
+    - vars/vars.yml
+  tasks:
+    - name: Enable repos
+      copy:
+        src: "files/{{ repo_file }}"
+        dest: "/etc/yum.repos.d/{{ repo_file }}"
+        mode: 0644
+
+- name: setup frontends
+  hosts: frontends
+  gather_facts: False
+  become: yes
+  roles:
+    - name: haproxy
+
+- name: setup tomcat
+  hosts: apps
+  gather_facts: False
+  become: yes
+  roles:
+    - name: tomcat
+
+- name: setup postgresql
+  hosts: appsdb
+  gather_facts: True
+  become: yes
+  roles:
+    - name: postgres
+
+- name: setup apche
+  hosts: apps
+  gather_facts: False
+  become: yes
+  roles:
+    - name: apache

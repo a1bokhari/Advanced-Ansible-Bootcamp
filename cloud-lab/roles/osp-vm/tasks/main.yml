@@ -1,0 +1,42 @@
+---
+# tasks file for roles/osp-vm
+- name: Deploy a VM
+  os_server:
+    cloud: ospcloud
+    name: "{{ item.name }}"
+    flavor: "{{ item.flavor }}"
+    image: "{{ item.image }}"
+    key_name: "{{ item.keyname }}"
+    network: "{{ item.network }}"
+    state: present
+    meta: "group={{ item.group }},deployment_name={{ item.deployment_name }}"
+    security_groups: "{{ item.secgroup }}"
+    userdata: |
+      #!/bin/bash
+      curl -o /tmp/openstack.pub http://www.opentlc.com/download/ansible_bootcamp/openstack_keys/openstack.pub
+      cat /tmp/openstack.pub >> /home/cloud-user/.ssh/authorized_keys
+      curl -o /tmp/internal.repo http://www.opentlc.com/download/ansible_bootcamp/repo/internal.repo
+      cp /tmp/internal.repo /etc/yum.repos.d/internal.repo
+  register: instanceip
+
+- name: Add floating IP to "{{ item.name }}"
+  os_floating_ip:
+    cloud: ospcloud
+    state: present
+    reuse: yes
+    server: "{{ item.name }}"
+    network: public_net
+    wait: true
+    timeout: 180
+  register: instancefloatingip
+
+- name: Show "{{ instanceip }}" public IP
+  debug: var=instancefloatingip.floating_ip.floating_ip_address
+
+- name: Wait for "{{ item.name }}" to be available
+  wait_for:
+    host: "{{ instancefloatingip.floating_ip.floating_ip_address }}"
+    port: 22
+    search_regex: OpenSSH
+    timeout: 600
+  delegate_to: "{{ inventory_hostname }}"
