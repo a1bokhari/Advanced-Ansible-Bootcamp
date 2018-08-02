@@ -1,6 +1,7 @@
 ---
 - name: Provision openstack networks
   hosts: jumpbox
+  gather_facts: true
   vars_files:
     - vars/vars.yml
   roles:
@@ -10,11 +11,11 @@
     - osp-securitygroup
   tasks:
     - name: Create all VMs
-      include_role: 
+      include_role:
         name: osp-vm
       with_items: "{{ vm_info }}"
 
 ## Alternate Method to create dynmaic inventory
     - name: Gather facts
-      include_role: 
+      include_role:
         name: osp-facts

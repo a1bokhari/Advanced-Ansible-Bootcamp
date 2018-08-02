@@ -10,11 +10,12 @@
     - osp-securitygroup
   tasks:
     - name: Create all VMs
-      include_role: 
+      include_role:
         name: osp-vm-dict
       with_dict: "{{ vm_info }}"
 
 ## Alternate Method to create dynmaic inventory
+## Create in-memory inventory
     - name: Gather facts
-      include_role: 
+      include_role:
         name: osp-facts
