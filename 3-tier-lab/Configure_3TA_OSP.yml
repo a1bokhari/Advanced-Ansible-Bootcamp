@@ -3,7 +3,7 @@
 # run this playbook with ansible.cfg and inventory from the cloud-labs folder
 #
 - name: Deploy a 3-tier app
-  hosts: jumpbox
+  hosts: all
   gather_facts: true
   roles:
     - name: ../cloud-lab/roles/osp-facts
