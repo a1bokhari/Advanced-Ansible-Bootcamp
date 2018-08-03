@@ -1,0 +1,28 @@
+---
+- name: Delete infrastructure VMs on OpenStack
+  hosts: jumpbox
+  gather_facts: true
+  vars_files:
+    - vars/vars.yml
+  tasks:
+    - name: Delete all VMs
+      include_role:
+        name: osp-vm
+      with_items: "{{ vm_info }}"
+
+    - name: Delete all security groups
+      include_role:
+        name: del-osp-securitygroup
+
+    - name: Delete all flavors
+      include_role:
+        name: del-osp-flavor
+
+    - name: Delete all keypairs
+      include_role:
+        name: del-osp-keypair
+
+    - name: Delete all networks
+      include_role:
+        name: del-osp-network
+

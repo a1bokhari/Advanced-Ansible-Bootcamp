@@ -1,0 +1,19 @@
+---
+- name: Delete security group - app_servers
+  os_security_group:
+    cloud: "{{ cloud_name }}"
+    state: absent
+    name: app_servers
+
+- name: Delete security group - frontend_servers
+  os_security_group:
+    cloud: "{{ cloud_name }}"
+    state: absent
+    name: frontend_servers
+    
+- name: Delete security group - db_servers
+  os_security_group:
+    cloud: "{{ cloud_name }}"
+    state: absent
+    name: db_servers
+    

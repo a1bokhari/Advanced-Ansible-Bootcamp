@@ -2,11 +2,11 @@
 # tasks file for roles/osp-flavor
 - name: Create custom flavor
   os_nova_flavor:
-    cloud: ospcloud
-    disk: 10
-    is_public: yes
-    ram: 2048
-    vcpus: 1
-    name: m2.small
+    cloud: "{{ cloud_name }}"
+    disk: "{{ disk_size }}"
+    is_public: "{{ is_public }}"
+    ram: "{{ ram_size }}"
+    vcpus: "{{ num_vcpus }}"
+    name: "{{ flavor_name }}"
     state: present
 

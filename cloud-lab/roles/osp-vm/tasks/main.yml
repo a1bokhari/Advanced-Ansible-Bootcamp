@@ -2,7 +2,7 @@
 # tasks file for roles/osp-vm
 - name: Deploy a VM
   os_server:
-    cloud: ospcloud
+    cloud: "{{ cloud_name }}"
     name: "{{ item.name }}"
     flavor: "{{ item.flavor }}"
     image: "{{ item.image }}"
@@ -15,13 +15,15 @@
       #!/bin/bash
       curl -o /tmp/openstack.pub http://www.opentlc.com/download/ansible_bootcamp/openstack_keys/openstack.pub
       cat /tmp/openstack.pub >> /home/cloud-user/.ssh/authorized_keys
+      curl -o /tmp/openstack.pem http://www.opentlc.com/download/ansible_bootcamp/openstack_keys/openstack.pem
+      cat /tmp/openstack.pem >> /home/cloud-user/.ssh/authorized_keys
       curl -o /tmp/internal.repo http://www.opentlc.com/download/ansible_bootcamp/repo/internal.repo
       cp /tmp/internal.repo /etc/yum.repos.d/internal.repo
   register: instanceip
 
 - name: Add floating IP to "{{ item.name }}"
   os_floating_ip:
-    cloud: ospcloud
+    cloud: "{{ cloud_name }}"
     state: present
     reuse: yes
     server: "{{ item.name }}"

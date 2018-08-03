@@ -1,0 +1,5 @@
+---
+- os_keypair:
+    cloud: "{{ cloud_name }}"
+    state: absent
+    name: ansible_ssh_key

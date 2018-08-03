@@ -2,14 +2,14 @@
 # tasks file for roles/osp-securitygroup
 - name: Create security group - app_servers
   os_security_group:
-    cloud: ospcloud
+    cloud: "{{ cloud_name }}"
     state: present
     name: app_servers
-    description: ports_open
+    description: ports open for app servers
 
 - name: Add rules to security group - app_servers
   os_security_group_rule: 
-    cloud: ospcloud
+    cloud: "{{ cloud_name }}"
     security_group: app_servers
     protocol: tcp
     port_range_min: "{{ item.port }}"
@@ -21,14 +21,14 @@
 
 - name: Create security group - frontend_servers
   os_security_group:
-    cloud: ospcloud
+    cloud: "{{ cloud_name }}"
     state: present
     name: frontend_servers
-    description: ports_open
+    description: ports open for fronend server
     
 - name: Add rules to security group - app_servers
   os_security_group_rule: 
-    cloud: ospcloud
+    cloud: "{{ cloud_name }}"
     security_group: frontend_servers
     protocol: tcp
     port_range_min: "{{ item.port }}"
@@ -41,14 +41,14 @@
 
 - name: Create security group - db_servers
   os_security_group:
-    cloud: ospcloud
+    cloud: "{{ cloud_name }}"
     state: present
     name: db_servers
-    description: ports_open
+    description: ports open for db servers
     
 - name: Add rules to security group - db_servers
   os_security_group_rule: 
-    cloud: ospcloud
+    cloud: "{{ cloud_name }}"
     security_group: db_servers
     protocol: tcp
     port_range_min: "{{ item.port }}"

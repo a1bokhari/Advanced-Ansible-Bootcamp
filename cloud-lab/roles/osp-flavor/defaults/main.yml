@@ -1,0 +1,7 @@
+---
+disk_size: 5
+is_public: yes
+ram_size: 2048
+num_vcpus: 1
+flavor_name: m2.small
+

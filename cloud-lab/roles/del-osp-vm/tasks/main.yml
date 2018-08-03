@@ -1,0 +1,6 @@
+---
+- name: Delete a VM
+  os_server:
+    cloud: "{{ cloud_name }}"
+    name: "{{ item.name }}"
+    state: absent

@@ -1,0 +1,31 @@
+---
+- name: Delete router
+  os_router:
+    cloud: "{{ cloud_name }}"
+    name: default_rtr
+    state: absent
+
+- name: Delete public subnet
+  os_subnet:
+    cloud: "{{ cloud_name }}"
+    name: public_subnet
+    state: absent
+
+- name: Delete private subnet
+  os_subnet:
+    cloud: "{{ cloud_name }}"
+    name: private_subnet
+    state: absent
+
+- name: Delete public network
+  os_network:
+    cloud: "{{ cloud_name }}"
+    name: public_net
+    state: absent
+
+- name: Delete Private network
+  os_network:
+    cloud: "{{ cloud_name }}"
+    name: private_net
+    state: absent
+    

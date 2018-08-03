@@ -1,4 +1,5 @@
 ---
+cloud_name: ospcloud
 vm_info:
   - { name: 'app1', group: 'apps', deployment_name: 'QA', flavor: 'm2.small', network: 'private_net', keyname: 'ansible_ssh_key', image: 'rhel-guest', secgroup: 'app_servers' }
   - { name: 'app2', group: 'apps', deployment_name: 'QA', flavor: 'm2.small', network: 'private_net', keyname: 'ansible_ssh_key', image: 'rhel-guest', secgroup: 'app_servers' }

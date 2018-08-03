@@ -2,7 +2,7 @@
 # tasks file for roles/osp-network---
 - name: Create public network
   os_network:
-    cloud: ospcloud
+    cloud: "{{ cloud_name }}"
     external: yes
     name: public_net
     shared: yes
@@ -10,7 +10,7 @@
 
 - name: Create public subnet
   os_subnet:
-    cloud: ospcloud
+    cloud: "{{ cloud_name }}"
     cidr: 10.10.10.0/24
     dns_nameservers: 
       - 8.8.8.7
@@ -26,7 +26,7 @@
 
 - name: Create Private network
   os_network:
-    cloud: ospcloud
+    cloud: "{{ cloud_name }}"
     external: no
     name: private_net
     shared: yes
@@ -34,7 +34,7 @@
     
 - name: Create private subnet
   os_subnet:
-    cloud: ospcloud
+    cloud: "{{ cloud_name }}"
     cidr: 20.20.20.0/24
     name: private_subnet
     network_name: private_net
@@ -46,11 +46,12 @@
         nexthop: 192.168.0.0
       - destination: 192.168.0.0/24
         nexthop: 192.168.0.0
+    state: present
 
 
 - name: Create router
   os_router:
-    cloud: ospcloud
+    cloud: "{{ cloud_name }}"
     name: default_rtr
     network: public_net
     external_fixed_ips:

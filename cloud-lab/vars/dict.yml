@@ -1,4 +1,5 @@
 ---
+cloud_name: ospcloud
 vm_info:
   app1:
     group: 'apps'
