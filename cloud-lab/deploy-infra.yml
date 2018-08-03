@@ -1,6 +1,6 @@
 ---
 - name: Delete infrastructure VMs on OpenStack
-  hosts: jumpbox
+  hosts: all
   gather_facts: true
   vars_files:
     - vars/vars.yml
