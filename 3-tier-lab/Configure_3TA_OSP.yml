@@ -6,7 +6,7 @@
   hosts: jumpbox
   gather_facts: true
   roles:
-    - name: osp-facts
+    - name: ../cloud-lab/roles/osp-facts
 
 - name: Enable repos
   hosts: frontends, apps, appsdb
