@@ -1,5 +1,5 @@
 ---
-disk_size: 5
+disk_size: 10
 is_public: yes
 ram_size: 2048
 num_vcpus: 1
