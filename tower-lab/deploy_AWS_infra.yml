@@ -2,7 +2,7 @@
 - name: Playbook to deploy infrastructure VMs in AWS
   hosts: localhost
   gather_facts: no
-  vars:
+  vars_files:
     - vars/vars.yml
   tasks:
     - name: Create "bin" directory
