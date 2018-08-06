@@ -18,8 +18,8 @@
         mode: 0755
 
     - name: Get scripts
-      copy:
-        src: "files/{{ item }}"
+      get_url:
+        url: "http://www.opentlc.com/download/ansible_bootcamp/scripts/{{ item }}"
         dest: "~/{{ item }}"
         mode: 0755
       with_items:
