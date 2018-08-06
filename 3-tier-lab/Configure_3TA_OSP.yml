@@ -49,3 +49,18 @@
   become: yes
   roles:
     - name: apache
+
+- name: Smoke test - Verify HAProxy
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Get web page content
+      uri:
+        url: http://frontend1
+        return_content: yes
+      register: webpage
+
+    - name: Fail if "Welcome to Tomcat" not in the returned content
+      fail:
+      when: "'Welcome to Tomcat' not in webpage.content"
+
