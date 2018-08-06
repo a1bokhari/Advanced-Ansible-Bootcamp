@@ -7,20 +7,20 @@
   tasks:
     - name: Create "bin" directory
       file:
-        path: "~/bin"
+        path: "tmp/bin"
         state: directory
         mode: 0755
 
     - name: Get "jq" binary
       get_url:
         url: http://www.opentlc.com/download/ansible_bootcamp/scripts/jq-linux64
-        dest: "~/bin/jq"
+        dest: "/tmp/bin/jq"
         mode: 0755
 
     - name: Get shell scripts
       get_url:
         url: "http://www.opentlc.com/download/ansible_bootcamp/scripts/{{ item }}"
-        dest: "~/{{ item }}"
+        dest: "/tmp/{{ item }}"
         mode: 0755
       with_items:
         - common.sh
@@ -29,8 +29,8 @@
     - name: Create credentials file
       template:
         src: templates/credential.rc.j2
-        dest: ~/credential.rc
+        dest: /tmp/credential.rc
 
     - name: Create the AWS service
-      shell: "source ~/credential.rc ; ~/order_svc.sh -c 'OPENTLC Automation' -i 'Three Tier Application' -t 1 -y"
+      shell: "source /tmp/credential.rc ; /tmp/order_svc.sh -c 'OPENTLC Automation' -i 'Three Tier Application' -t 1 -y"
 
