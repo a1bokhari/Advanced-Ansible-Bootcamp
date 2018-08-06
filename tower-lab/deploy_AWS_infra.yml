@@ -1,26 +1,27 @@
 ---
 - name: Playbook to deploy infrastructure VMs in AWS
   hosts: localhost
+  remote_user: ec2-user
   gather_facts: no
   vars_files:
     - vars/vars.yml
   tasks:
     - name: Create "bin" directory
       file:
-        path: "/tmp/bin"
+        path: "/home/ec2-user/bin"
         state: directory
         mode: 0755
 
     - name: Get "jq" binary
       get_url:
         url: http://www.opentlc.com/download/ansible_bootcamp/scripts/jq-linux64
-        dest: "/tmp/bin/jq"
+        dest: "/home/ec2-user/bin/jq"
         mode: 0755
 
     - name: Get shell scripts
       get_url:
         url: "http://www.opentlc.com/download/ansible_bootcamp/scripts/{{ item }}"
-        dest: "/tmp/{{ item }}"
+        dest: "/home/ec2-user/{{ item }}"
         mode: 0755
       with_items:
         - common.sh
@@ -29,8 +30,8 @@
     - name: Create credentials file
       template:
         src: templates/credential.rc.j2
-        dest: /tmp/credential.rc
+        dest: /home/ec2-user/credential.rc
 
     - name: Create the AWS service
-      shell: "source /tmp/credential.rc ; /tmp/order_svc.sh -c 'OPENTLC Automation' -i 'Three Tier Application' -t 1 -y"
+      shell: "source /home/ec2-user/credential.rc ; /home/ec2-user/order_svc.sh -c 'OPENTLC Automation' -i 'Three Tier Application' -t 1 -y"
 
