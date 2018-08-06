@@ -7,7 +7,7 @@
   tasks:
     - name: Create "bin" directory
       file:
-        path: "tmp/bin"
+        path: "/tmp/bin"
         state: directory
         mode: 0755
 
