@@ -33,5 +33,5 @@
         dest: /home/ec2-user/credential.rc
 
     - name: Create the AWS service
-      shell: "source /home/ec2-user/credential.rc ; /home/ec2-user/order_svc.sh -c 'OPENTLC Automation' -i 'Three Tier Application' -t 1 -y"
+      shell: "source /home/ec2-user/credential.rc ; /home/ec2-user/order_svc.sh -c 'OPENTLC Automation' -i 'Three Tier Application' -t 1"
 
