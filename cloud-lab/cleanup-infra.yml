@@ -5,7 +5,7 @@
   vars_files:
     - vars/vars.yml
   tasks:
-    - name: Delete all VMs
+    - name: Delete all VMs and associated floating IPs
       include_role:
         name: del-osp-vm
       with_items: "{{ vm_info }}"

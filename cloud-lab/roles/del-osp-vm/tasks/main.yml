@@ -1,4 +1,12 @@
 ---
+- name: Delete the floating IP from "{{ item.name }}"
+  os_floating_ip:
+    cloud: "{{ cloud_name }}"
+    server: "{{ item.name }}"
+    network: public_net
+    state: absent
+    purge: true
+
 - name: Delete a VM
   os_server:
     cloud: "{{ cloud_name }}"
