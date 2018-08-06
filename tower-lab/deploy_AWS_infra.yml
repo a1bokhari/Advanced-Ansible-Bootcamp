@@ -17,17 +17,14 @@
         dest: "~/bin/jq"
         mode: 0755
 
-    - name: Get order_svc.sh script
-      get_url:
-        url: http://www.opentlc.com/download/ansible_bootcamp/scripts/order_svc.sh
-        dest: ~/order_svc.sh
-        mode: 0755
-
-    - name: Get common.sh script
+    - name: Get scripts
       copy:
-        src: files/common.sh
-        dest: ~/common.sh
+        src: "files/{{ item }}"
+        dest: "~/{{ item }}"
         mode: 0755
+      with_items:
+        - order_svc.sh
+        - common.sh
 
     - name: Create credentials file
       template:
