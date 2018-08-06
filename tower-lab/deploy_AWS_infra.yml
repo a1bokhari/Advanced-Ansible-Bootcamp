@@ -1,7 +1,6 @@
 ---
 - name: Playbook to deploy infrastructure VMs in AWS
   hosts: localhost
-  remote_user: ec2-user
   gather_facts: no
   vars_files:
     - vars/vars.yml
