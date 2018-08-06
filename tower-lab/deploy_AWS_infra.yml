@@ -1,6 +1,6 @@
 ---
 - name: Playbook to deploy infrastructure VMs in AWS
-  hosts: localhost
+  hosts: tower1
   remote_user: ec2-user
   gather_facts: no
   vars_files:
@@ -33,5 +33,5 @@
         dest: /home/ec2-user/credential.rc
 
     - name: Create the AWS service
-      shell: "source /home/ec2-user/credential.rc ; /home/ec2-user/order_svc.sh -c 'OPENTLC Automation' -i 'Three Tier Application' -t 1"
+      shell: "/home/ec2-user/order_svc.sh -c 'OPENTLC Automation' -i 'Three Tier Application' -t 1"
 
