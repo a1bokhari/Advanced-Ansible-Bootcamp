@@ -1,6 +1,6 @@
 ---
 - name: Clean up OpenStack infrastructure
-  hosts: jumpbox
+  hosts: all
   gather_facts: true
   vars_files:
     - vars/vars.yml
