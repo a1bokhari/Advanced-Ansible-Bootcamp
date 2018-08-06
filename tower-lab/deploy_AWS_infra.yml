@@ -19,7 +19,7 @@
 
     - name: Get order_svc.sh script
       get_url:
-        url: "http://www.opentlc.com/download/ansible_bootcamp/scripts/order_svc.sh
+        url: http://www.opentlc.com/download/ansible_bootcamp/scripts/order_svc.sh
         dest: ~/order_svc.sh
         mode: 0755
 
