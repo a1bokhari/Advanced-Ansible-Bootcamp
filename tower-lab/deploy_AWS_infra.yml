@@ -32,5 +32,5 @@
         dest: ~/credential.rc
 
     - name: Create the AWS service
-      shell: "source ~/credential.rc ; ~/order_svc.sh -c 'OPENTLC Automation' -i 'Three Tier Application' -t 1"
+      shell: "source ~/credential.rc ; ~/order_svc.sh -c 'OPENTLC Automation' -i 'Three Tier Application' -t 1 -y"
 
