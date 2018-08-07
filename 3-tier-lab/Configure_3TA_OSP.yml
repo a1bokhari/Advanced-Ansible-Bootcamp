@@ -56,16 +56,23 @@
     - name: apache
 
 - name: Smoke test - Verify HAProxy
-  hosts: localhost
+  hosts: frontends
   gather_facts: no
   become: no
   tasks:
+    - name: print debug
+      debug:
+        var: "{{ inventory_hostname }}"
+
     - name: Get web page content
       uri:
-        url: "http://{{ item }}"
+        url: "http://{{ inventory_hostname }}"
         return_content: yes
       register: webpage
-      with_items: "{{ groups.frontends }}"
+
+    - name: print debug
+      debug:
+        var: webpage
 
     - name: Fail if "Welcome to Tomcat" not in the returned content
       fail:
