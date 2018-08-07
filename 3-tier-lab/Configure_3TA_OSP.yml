@@ -63,12 +63,14 @@
     - name: print debug
       debug:
         var: "{{ inventory_hostname }}"
+      tags: p1
 
     - name: Get web page content
       uri:
         url: "http://{{ inventory_hostname }}"
         return_content: yes
       register: webpage
+      tags: p1
 
     - name: print debug
       debug:
@@ -77,4 +79,5 @@
     - name: Fail if "Welcome to Tomcat" not in the returned content
       fail:
       when: "'Welcome to Tomcat' not in webpage.content"
+      tags: p1
 
