@@ -9,6 +9,11 @@
     - ../cloud-lab/vars/vars.yml
   roles:
     - name: ../cloud-lab/roles/osp-facts
+  tasks:
+    - name: Delete ".ssh/known_hosts" file on workstation
+      file:
+        path: ~/.ssh/known_hosts
+        state: absent
 
 - name: Enable repos
   hosts: frontends, apps, appsdb
@@ -53,12 +58,14 @@
 - name: Smoke test - Verify HAProxy
   hosts: localhost
   gather_facts: no
+  become: no
   tasks:
     - name: Get web page content
       uri:
-        url: http://frontend1
+        url: "http://{{ item }}"
         return_content: yes
       register: webpage
+      with_items: "{{ groups.frontends }}"
 
     - name: Fail if "Welcome to Tomcat" not in the returned content
       fail:
