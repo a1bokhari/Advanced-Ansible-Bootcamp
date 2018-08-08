@@ -1,0 +1,42 @@
+---
+- name: Cleanup AWS environment
+  hosts: frontends, apps, appsdb
+  gather_facts: False
+  vars_files:
+    - vars/vars.yml
+  tasks:
+    - name: Disable repos
+      template:
+        src: /dev/null
+        dest: "/etc/yum.repos.d/{{ repo_file }}"
+
+    - name: remove base tools and three tier app packages
+      yum:
+        name: "{{ item }}"
+        state: absent
+      with_items:
+        - httpie
+        - python-pip
+        - haproxy
+        - tomcat
+        - postgresql-server
+
+- name: Clean tomcat config
+  hosts: apps
+  gather_facts: False
+  become: yes
+  tasks:
+    - name: delete tomcat webapps directory - removing index.html etc
+      file:
+        path: /usr/share/tomcat/webapps
+        state: absent
+
+- name: Clean frontends
+  hosts: frontends
+  gather_facts: False
+  become: yes
+  tasks:
+    - name: delete haproxy.cfg from /etc/haproxy
+      file:
+        path: /etc/haproxy/haproxy.cfg
+        state: absent

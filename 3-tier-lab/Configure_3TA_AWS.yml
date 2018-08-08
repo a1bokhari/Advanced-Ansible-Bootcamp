@@ -1,4 +1,17 @@
 ---
+- name: Wait for AWS infra to be available
+  hosts: frontends, apps, appsdb
+  gather_facts: False
+  tasks:
+    wait_for:
+      host: "{{ inventory_hostname }}"
+      port: 22
+      state: started
+      delay: 30
+      timeout: 900
+      sleep: 30
+    delegate_to: localhost
+
 - name: Enable repos for 3-tier app
   hosts: frontends, apps, appsdb
   gather_facts: False
@@ -40,15 +53,30 @@
     - name: apache
 
 - name: Smoke test - Verify HAProxy
-  hosts: localhost
+  hosts: frontends
   gather_facts: no
+  become: no
   tasks:
+    - name: Wait for services to start
+      wait_for:
+        timeout: 30
+      delegate_to: localhost
+
+    - name: print debug
+      debug:
+        var: "{{ inventory_hostname }}"
+
     - name: Get web page content
       uri:
-        url: http://frontend1
+        url: "http://{{ inventory_hostname }}"
         return_content: yes
       register: webpage
+
+    - name: print debug
+      debug:
+        var: webpage
 
     - name: Fail if "Welcome to Tomcat" not in the returned content
       fail:
       when: "'Welcome to Tomcat' not in webpage.content"
+
