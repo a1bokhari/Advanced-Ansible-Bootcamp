@@ -8,7 +8,7 @@
   vars_files:
     - vars/vms.yml
   roles:
-    - name: osp-facts
+    - osp-facts
   tasks:
     - name: Delete ".ssh/known_hosts" file on workstation
       file:
