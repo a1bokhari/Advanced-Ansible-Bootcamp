@@ -2,8 +2,8 @@
 # tasks file for roles/aws-facts
 - name: Fetch Instance Info
   ec2_instance_facts:
+    region: us-east-1
     filters:
-      availability-zone: us-east-1
       "tag:instance_filter": "three-tier-app-abokhari*"
   register: result
 
