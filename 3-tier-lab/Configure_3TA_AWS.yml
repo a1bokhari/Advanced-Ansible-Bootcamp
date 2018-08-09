@@ -2,7 +2,6 @@
 - name: Wait for AWS infra to be available
   hosts: bastion
   gather_facts: False
-  connection: local
   tasks:
     - name: Wait for bastion server
       wait_for:
@@ -13,6 +12,7 @@
         timeout: 900
         sleep: 30
       delegate_to: localhost
+      connection: local
 
 - name: Get ssh keys to connect to the new AWS env
   hosts: bastion
