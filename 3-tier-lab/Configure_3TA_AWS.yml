@@ -1,18 +1,18 @@
 ---
-- name: Wait for AWS infra to be available
-  hosts: bastion
-  gather_facts: False
-  tasks:
-    - name: Wait for bastion server
-      wait_for:
-        host: "{{ inventory_hostname }}"
-        port: 22
-        state: started
-        delay: 30
-        timeout: 900
-        sleep: 30
-      delegate_to: localhost
-      connection: local
+#- name: Wait for AWS infra to be available
+#  hosts: bastion
+#  gather_facts: False
+#  tasks:
+#    - name: Wait for bastion server
+#      wait_for:
+#        host: "{{ inventory_hostname }}"
+#        port: 22
+#        state: started
+#        delay: 30
+#        timeout: 900
+#        sleep: 30
+#      delegate_to: localhost
+#      connection: local
 
 - name: Get ssh keys to connect to the new AWS env
   hosts: bastion
