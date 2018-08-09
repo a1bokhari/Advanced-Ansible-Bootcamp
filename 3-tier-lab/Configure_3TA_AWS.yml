@@ -2,6 +2,7 @@
 - name: Wait for AWS infra to be available
   hosts: bastion
   gather_facts: False
+  connection: local
   tasks:
     - name: Wait for bastion server
       wait_for:
