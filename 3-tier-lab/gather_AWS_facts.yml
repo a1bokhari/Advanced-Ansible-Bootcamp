@@ -1,0 +1,7 @@
+---
+- name: Gather AWS facts
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  roles:
+    - aws-facts
