@@ -3,6 +3,7 @@
   gather_facts: true
   tasks:
     - name: Delete ".ssh/known_hosts" file on workstation
+      become: true
       file:
         path: /var/lib/awx/.ssh/known_hosts
         state: absent
