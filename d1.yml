@@ -1,0 +1,9 @@
+- name: Deploy a 3-tier app
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Delete ".ssh/known_hosts" file on workstation
+      file:
+        path: ~/.ssh/known_hosts
+        state: absent
+
