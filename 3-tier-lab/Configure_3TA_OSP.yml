@@ -11,8 +11,9 @@
     - osp-facts
   tasks:
     - name: Delete ".ssh/known_hosts" file on workstation
+      become: true
       file:
-        path: ~/.ssh/known_hosts
+        path: /var/lib/awx/.ssh/known_hosts
         state: absent
 
 - name: Enable repos
