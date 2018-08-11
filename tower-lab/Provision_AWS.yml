@@ -34,7 +34,7 @@
     - name: Create the AWS service
       shell: "source ~/credential.rc ; ~/order_svc.sh -c 'OPENTLC Automation' -i 'Three Tier Application' -t 1 -y"
 
-    - name: Wait for 10 minutes for AWS infra to be ready
+    - name: Wait for 15 minutes for AWS infra to be ready
       wait_for:
-        timeout: 600
+        timeout: 900
       delegate_to: localhost
