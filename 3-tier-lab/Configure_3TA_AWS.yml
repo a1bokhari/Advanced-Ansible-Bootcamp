@@ -2,10 +2,10 @@
 - name: Build In-memory inventory for AWS
   hosts: localhost
   gather_facts: false
+  become: false
   tasks:
     - include_role:
         name: aws-facts
-      connection: local
 
 - name: Wait for AWS infra to be available
   hosts: bastions
