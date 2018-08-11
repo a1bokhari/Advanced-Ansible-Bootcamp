@@ -1,6 +1,14 @@
 ---
+- name: Build In-memory inventory for AWS
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - include_role:
+        name: aws-facts
+      connection: local
+
 - name: Wait for AWS infra to be available
-  hosts: bastion
+  hosts: bastions
   gather_facts: False
   become: false
   tasks:
@@ -15,7 +23,7 @@
       delegate_to: localhost
 
 - name: Get ssh keys to connect to the new AWS env
-  hosts: bastion
+  hosts: bastions
   gather_facts: False
   become: true
   remote_user: "{{ user_name }}"
@@ -42,7 +50,7 @@
       delegate_to: localhost
 
 - name: Enable repos for 3-tier app
-  hosts: frontends, apps, appsdb
+  hosts: frontends, apps, appdbs
   gather_facts: False
   remote_user: ec2-user
   vars_files:
@@ -71,7 +79,7 @@
     - name: tomcat
 
 - name: setup postgresql
-  hosts: appsdb
+  hosts: appdbs
   gather_facts: True
   become: yes
   remote_user: ec2-user

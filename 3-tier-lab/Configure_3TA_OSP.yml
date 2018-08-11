@@ -16,6 +16,11 @@
         path: /var/lib/awx/.ssh/known_hosts
         state: absent
 
+    - name: Wait for the VMs to initialize in the OpenStack environment
+      wait_for:
+        timeout: 60
+      delegate_to: localhost
+
 - name: Enable repos
   hosts: frontends, apps, appsdb
   gather_facts: False

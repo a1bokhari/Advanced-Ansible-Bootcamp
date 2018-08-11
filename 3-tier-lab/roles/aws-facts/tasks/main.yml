@@ -1,6 +1,6 @@
 ---
 # tasks file for roles/aws-facts
-- name: Fetch Instance Info
+- name: Gather AWS instance details
   ec2_instance_facts:
     region: us-east-1
     filters:
@@ -10,3 +10,11 @@
 - name: print
   debug:
     var: result
+
+- name: Add host to in-memory intventory
+  add_host:
+   name: "{{ item.public_ip_address }}"
+   group:
+     - "{{ item.tags.AnsibleGroup }}"
+  with_items: "{{result.instances}}"
+
