@@ -105,10 +105,6 @@
         timeout: 30
       delegate_to: localhost
 
-    - name: print debug
-      debug:
-        var: "{{ inventory_hostname }}"
-
     - name: Get web page content
       uri:
         url: "http://{{ inventory_hostname }}"
