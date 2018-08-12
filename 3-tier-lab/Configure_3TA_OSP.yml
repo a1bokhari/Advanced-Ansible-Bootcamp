@@ -17,6 +17,7 @@
         state: absent
 
     - name: Wait for the VMs to initialize in the OpenStack environment
+      become: false
       wait_for:
         timeout: 60
       delegate_to: localhost
