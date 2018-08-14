@@ -1,6 +1,6 @@
 Role Name
 =========
-haproxy: Install and starts the httpd and haproxy services
+postgres: Install and start the postgres database service
 
 Requirements
 ------------

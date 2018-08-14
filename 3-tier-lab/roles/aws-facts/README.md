@@ -1,10 +1,10 @@
 Role Name
 =========
-haproxy: Install and starts the httpd and haproxy services
+aws-facts: Gathers server details from AWS EC2 and build in-memory inventory
 
 Requirements
 ------------
-None.
+boto package is required.
 
 Role Variables
 --------------
